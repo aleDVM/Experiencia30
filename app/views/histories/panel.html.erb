@@ -1,0 +1,28 @@
+<h1>USUARIOS</h1>
+<table class="table">
+  <tr>
+    <td>Id</td>
+    <td>Nombre</td>
+    <td>Rol</td>
+    <td>Editar</td>
+    <td>Mostrar Historia</td>
+
+  </tr>
+
+      <%@histories.each do |history|%>
+  <tr>
+
+    <td><%= history.user.try(:id)%></td>
+    <td><%=history.user.try(:name)%></td>
+    <td><% if history.user.try(:admin) == true%>
+        admin
+      <%else%>
+        user
+      <%end%>
+
+    </td>
+    <td>  <%= link_to 'Edit', edit_admin_path(history.user.id), class: "btn btn-warning" %></td>
+<td><%= link_to 'Histories', my_path(history.user.id), class: "btn btn-success" %></td>
+
+  </tr> <%end%>
+</table>
