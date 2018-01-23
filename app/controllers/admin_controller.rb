@@ -3,9 +3,14 @@ class AdminController < ApplicationController
   def edit
   end
   def update
-    @user.admin = true
-    @user.update(admin_params)
-    redirect_to root_path
+    if @user.admin == true          
+      @user.update(admin: false)
+     
+      redirect_to edit_admin_path
+    else
+      @user.update(admin: true)
+      redirect_to root_path   
+    end     
   end
 
   private
