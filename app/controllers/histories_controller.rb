@@ -19,7 +19,7 @@ class HistoriesController < ApplicationController
   end
 
   def check_user!
-    if @history.user.id == current_user.id || current_user.admin == true
+    if @history.user.id == current_user.id || current_user.admin == false
     else
       redirect_to panel_path
     end
@@ -30,8 +30,12 @@ class HistoriesController < ApplicationController
   end
 
   def panel
-    @user = User.all
-    @histories = History.all
+    if current_user.admin == true
+      @user = User.all
+      @histories = History.all
+    else
+      redirect_to root_path
+  end
   end
 
   # GET /histori, only: [:edit]es/new
